@@ -18,7 +18,7 @@ const calcLineTotal = (item) => {
   const price = parseFloat(item.unitPrice) || 0;
   const disc = parseFloat(item.discount) || 0;
   const tax = parseFloat(item.tax) || 0;
-  return (qty * price) - disc + tax;
+  return (qty * price - disc)  * (1 + tax/100);
 };
 
 export default function CreateInvoicePage() {

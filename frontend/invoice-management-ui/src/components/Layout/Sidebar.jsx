@@ -46,7 +46,7 @@ export default function Sidebar() {
           <>
             <div className="nav-section-label">Analytics</div>
             <NavItem to="/analytics/aging" icon="📊" label="Aging Report" />
-            <NavItem to="/analytics/revenue" icon="📈" label="Revenue" />
+            <NavItem to="/analytics/revenue" icon="💰" label="Revenue Dashboard" />
           </>
         )}
       </nav>

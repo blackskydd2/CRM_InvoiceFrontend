@@ -20,7 +20,6 @@ export default function AddPaymentPage() {
     paymentDate: today,
     paymentMethod: 'BankTransfer',
     referenceNumber: '',
-    receivedDate: today,
   });
   const [errors, setErrors] = useState({});
 
@@ -47,6 +46,7 @@ export default function AddPaymentPage() {
     }
     if (!form.paymentDate) errs.paymentDate = 'Payment date is required';
     if (!form.paymentMethod) errs.paymentMethod = 'Payment method is required';
+    if (!form.referenceNumber) errs.referenceNumber = 'Reference number is required';
     setErrors(errs);
     return Object.keys(errs).length === 0;
   };
@@ -153,7 +153,7 @@ export default function AddPaymentPage() {
 
             <div className="form-grid form-grid-2">
               <div className="form-group">
-                <label className="form-label">Payment Date *</label>
+                <label className="form-label">Payment Date</label>
                 <input
                   type="date"
                   className="form-input"
@@ -161,16 +161,6 @@ export default function AddPaymentPage() {
                   onChange={e => setField('paymentDate', e.target.value)}
                 />
                 {errors.paymentDate && <div className="form-error">⚠ {errors.paymentDate}</div>}
-              </div>
-
-              <div className="form-group">
-                <label className="form-label">Received Date</label>
-                <input
-                  type="date"
-                  className="form-input"
-                  value={form.receivedDate}
-                  onChange={e => setField('receivedDate', e.target.value)}
-                />
               </div>
             </div>
 
@@ -198,6 +188,7 @@ export default function AddPaymentPage() {
                 onChange={e => setField('referenceNumber', e.target.value)}
                 style={{ fontFamily: 'var(--font-mono)' }}
               />
+              {errors.referenceNumber && <div className="form-error">⚠ {errors.referenceNumber}</div>}
               <div className="form-hint">Transaction ID, cheque number, or transfer reference</div>
             </div>
 

@@ -5,7 +5,7 @@ import { useAuth } from '../../context/AuthContext';
 export default function LoginPage() {
   const { login } = useAuth();
   const navigate = useNavigate();
-  const [form, setForm] = useState({ email: '', password: '' });
+  const [form, setForm] = useState({ username: '', password: '' });
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
 
@@ -16,16 +16,16 @@ export default function LoginPage() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setError('');
-    if (!form.email || !form.password) {
-      setError('Email and password are required.');
+    if (!form.username || !form.password) {
+      setError('Username and password are required.');
       return;
     }
     setLoading(true);
     try {
-      await login(form.email, form.password);
+      await login(form.username, form.password);
       navigate('/dashboard');
     } catch (err) {
-      setError(err.response?.data?.message || 'Invalid email or password.');
+      setError(err.response?.data?.message || 'Invalid username or password.');
     } finally {
       setLoading(false);
     }
@@ -74,16 +74,16 @@ export default function LoginPage() {
 
           <form onSubmit={handleSubmit}>
             <div className="form-group">
-              <label className="form-label" htmlFor="email">Email Address</label>
+              <label className="form-label" htmlFor="username">Username</label>
               <input
-                id="email"
-                name="email"
-                type="email"
+                id="username"
+                name="username"
+                type="text"
                 className="form-input"
-                placeholder="you@company.com"
-                value={form.email}
+                placeholder="username"
+                value={form.username}
                 onChange={handleChange}
-                autoComplete="email"
+                autoComplete="username"
                 autoFocus
               />
             </div>
@@ -121,19 +121,19 @@ export default function LoginPage() {
             <p style={{ fontSize: '0.72rem', color: 'var(--text-muted)', marginBottom: '0.5rem', textTransform: 'uppercase', letterSpacing: '0.08em', fontWeight: 600 }}>Demo Credentials</p>
             <div style={{ display: 'flex', flexDirection: 'column', gap: '0.3rem' }}>
               {[
-                { label: 'Admin', email: 'admin@company.com' },
-                { label: 'Finance Manager', email: 'manager@company.com' },
-                { label: 'Finance User', email: 'user@company.com' },
+                { label: 'Admin', username: 'admin' },
+                { label: 'Finance Manager', username: 'finance-manager' },
+                { label: 'Finance User', username: 'user' },
               ].map(d => (
                 <button
-                  key={d.email}
+                  key={d.username}
                   type="button"
                   className="btn btn-ghost btn-sm"
                   style={{ justifyContent: 'flex-start', fontSize: '0.75rem' }}
-                  onClick={() => setForm({ email: d.email, password: 'password123' })}
+                  onClick={() => setForm({ username: d.username, password: 'password123' })}
                 >
                   <span style={{ color: 'var(--accent)', width: 100 }}>{d.label}</span>
-                  <span style={{ fontFamily: 'var(--font-mono)', color: 'var(--text-muted)' }}>{d.email}</span>
+                  <span style={{ fontFamily: 'var(--font-mono)', color: 'var(--text-muted)' }}>{d.username}</span>
                 </button>
               ))}
             </div>

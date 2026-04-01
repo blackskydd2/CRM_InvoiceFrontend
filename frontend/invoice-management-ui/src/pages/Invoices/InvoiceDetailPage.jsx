@@ -101,7 +101,7 @@ export default function InvoiceDetailPage() {
               + Add Payment
             </button>
           )}
-          {hasRole('Admin') && canEdit && (
+          {hasRole('FinanceManager', 'Admin') && canEdit && (
             <button className="btn btn-danger" onClick={() => setShowDeleteConfirm(true)}>
               Delete
             </button>
